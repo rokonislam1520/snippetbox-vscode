@@ -1,0 +1,48 @@
+{
+  "name": "snippetbox",
+  "displayName": "SnippetBox — Smart Code Snippet Manager",
+  "description": "Save, organize, search, and reuse your own code snippets directly inside VS Code.",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Snippets", "Other"],
+  "keywords": ["snippet", "code manager", "productivity", "reuse"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "snippetbox.saveSnippet", "title": "SnippetBox: Save Selection as Snippet" },
+      { "command": "snippetbox.exportSnippets", "title": "SnippetBox: Export All Snippets" },
+      { "command": "snippetbox.importSnippets", "title": "SnippetBox: Import Snippets" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "snippetbox.saveSnippet", "when": "editorHasSelection", "group": "snippetbox@1" }
+      ]
+    },
+    "keybindings": [
+      { "command": "snippetbox.saveSnippet", "key": "ctrl+shift+s", "mac": "cmd+shift+s", "when": "editorHasSelection" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "snippetbox", "title": "SnippetBox", "icon": "assets/sidebar-icon.svg" }
+      ]
+    },
+    "views": {
+      "snippetbox": [
+        { "id": "snippetboxPanel", "name": "My Snippets", "type": "webview" },
+        { "id": "snippetboxView", "name": "By Tag", "type": "tree" }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
